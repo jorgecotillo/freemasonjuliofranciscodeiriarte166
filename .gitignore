@@ -28,8 +28,8 @@ Obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
-/wwwroot/dist/**
-/ClientApp/dist/**
+/wwwroot/dist/*.svg
+#/ClientApp/dist/**
 
 # Workaround for https://github.com/aspnet/JavaScriptServices/issues/235
 !/wwwroot/dist/_placeholder.txt
@@ -193,7 +193,7 @@ ClientBin/
 orleans.codegen.cs
 
 # Workaround for https://github.com/aspnet/JavaScriptServices/issues/235
-/node_modules/**
+#/node_modules/**
 !/node_modules/_placeholder.txt
 
 # RIA/Silverlight projects
