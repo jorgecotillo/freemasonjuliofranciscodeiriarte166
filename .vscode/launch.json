@@ -6,7 +6,11 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
+<<<<<<< HEAD
             "program": "${workspaceRoot}/presentation/bin/Debug/netcoreapp1.0/presentation.dll",
+=======
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.0/Angular2Application2.dll",
+>>>>>>> 7214ee59e18c06976a305803585d64e82ea78191
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,

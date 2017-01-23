@@ -7,7 +7,11 @@
         {
             "taskName": "build",
             "args": [
+<<<<<<< HEAD
                 "${workspaceRoot}/presentation/project.json"
+=======
+                "${workspaceRoot}/project.json"
+>>>>>>> 7214ee59e18c06976a305803585d64e82ea78191
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
