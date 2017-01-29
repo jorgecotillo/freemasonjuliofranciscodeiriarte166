@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace Julio.Francisco.De.Iriarte
+namespace Julio.Francisco.De.Iriarte.Data.Logging
 {
     public class ApplicationDbContextLogger : ILoggerProvider
     {

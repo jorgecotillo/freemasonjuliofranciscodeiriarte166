@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace WebApplication.Data.Migrations
+namespace Julio.Francisco.De.Iriarte.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
