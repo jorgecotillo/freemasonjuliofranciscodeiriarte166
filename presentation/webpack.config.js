@@ -25,8 +25,13 @@ var sharedConfig = {
 // Configuration for client-side bundle suitable for running in browsers
 var clientBundleConfig = merge(sharedConfig,
     {
-        entry: { 'main-client': './ClientApp/boot-client.ts' },
-        output: { path: path.join(__dirname, './wwwroot/dist') },
+        entry: { 
+            'main-client': './ClientApp/boot-client.ts' 
+        },
+        output: {  
+            //filename: getOutputName('[name]'),
+            path: path.join(__dirname, './wwwroot/dist')
+        },
         devtool: isDevBuild ? 'inline-source-map' : null,
         plugins: [
             new webpack.DllReferencePlugin({
@@ -51,5 +56,21 @@ var serverBundleConfig = merge(sharedConfig, {
     devtool: 'inline-source-map',
     externals: [nodeExternals({ whitelist: [allFilenamesExceptJavaScript] })] // Don't bundle .js files from node_modules
 });
+
+function getOutputName(filename){
+    var newName = '';
+
+    if (filename === 'boot-client'){
+        newName = 'main-client.js';
+    }
+    else if (filename === 'boot-server'){
+        newName = 'main-server.js';
+    }
+    else{
+        newName = filename + '.js';
+    }
+
+    return newName;
+};
 
 module.exports = [clientBundleConfig, serverBundleConfig];

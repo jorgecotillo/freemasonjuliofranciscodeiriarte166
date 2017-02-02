@@ -11,7 +11,7 @@ if (module['hot']) {
 } else {
     enableProdMode();
 }
-
+//var x = window.localStorage;
 // Boot the application, either now or when the DOM content is loaded
 const platform = platformUniversalDynamic();
 const bootApplication = () => { platform.bootstrapModule(AppModule); };
