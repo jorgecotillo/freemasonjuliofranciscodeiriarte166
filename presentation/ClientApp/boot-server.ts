@@ -3,6 +3,7 @@ import 'zone.js';
 import { enableProdMode } from '@angular/core';
 import { platformNodeDynamic } from 'angular2-universal';
 import { AppModule } from './app/app.module';
+import { LocalStorage } from './local-storage'
 
 enableProdMode();
 const platform = platformNodeDynamic();

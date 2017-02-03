@@ -1,4 +1,5 @@
 //declare var localStorage : any;
+import 'angular2-universal-polyfills';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
@@ -8,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { LocalStorage } from '../../ClientApp/local-storage';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -35,4 +37,5 @@ import { CallbackComponent } from './components/callback/callback.component';
     ]
 })
 export class AppModule {
+    
 }
