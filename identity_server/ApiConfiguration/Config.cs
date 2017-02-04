@@ -6,6 +6,8 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer.ApiConfiguration
 {
     public class Config
     {
+        //This method is needed otherwise IdentiyServer4 was throwing an exception
+        //related to invalid scope: openid
         public static List<IdentityResource> GetIdentityResources()
         {
             return new List<IdentityResource>
