@@ -41,6 +41,8 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
                     .AllowAnyHeader());
             });
 
+            //services.AddMvc();
+
             // For use with CachedPropertiesDataFormat. In load-balanced scenarios 
             // you should use a persistent cache such as Redis or SQL Server.
             services.AddDistributedMemoryCache();
@@ -52,6 +54,7 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
             .AddInMemoryClients(Config.GetClients());*/
             services.AddIdentityServer()
                 .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryClients(Config.GetClients());
                 //.AddInMemoryUsers(Config.GetUsers());
         }
@@ -60,7 +63,7 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(LogLevel.Debug);
-            //app.UseDeveloperExceptionPage();
+            app.UseDeveloperExceptionPage();
             
             app.UseCors("AllowSpecificOrigin");
             
@@ -73,6 +76,13 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
                 AutomaticAuthenticate = false,
                 AutomaticChallenge = false
             });
+
+            /*app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });*/
 
             var schemeName = "oidc";   
             var dataProtectionProvider = app.ApplicationServices.GetRequiredService<IDataProtectionProvider>();
@@ -112,8 +122,8 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
                 StateDataFormat = dataFormat
             });
 
-            /*loggerFactory.AddConsole();
-
+            loggerFactory.AddConsole();
+            /*
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

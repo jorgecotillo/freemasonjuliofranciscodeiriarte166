@@ -6,6 +6,15 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer.ApiConfiguration
 {
     public class Config
     {
+        public static List<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile() // <-- usefull
+            };
+        }
+        
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource>
@@ -41,8 +50,8 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer.ApiConfiguration
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris =           { "http://localhost:4040/callback.html" },
-                    PostLogoutRedirectUris = { "http://localhost:4040/index.html" },
+                    RedirectUris =           { "http://localhost:4040/callback" },
+                    PostLogoutRedirectUris = { "http://localhost:4040/home" },
                     AllowedCorsOrigins =     { "http://localhost:4040" },
 
                     AllowedScopes =

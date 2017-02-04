@@ -38,7 +38,7 @@ export class HomeComponent {
         client_id: "js",
         redirect_uri: "http://localhost:4040/callback",
         response_type: "id_token token",
-        scope:"openid profile api1",
+        scope: "openid profile api1",
         post_logout_redirect_uri : "http://localhost:4040/home"
         //userStore : localStorage
       });
