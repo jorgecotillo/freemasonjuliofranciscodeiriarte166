@@ -40,7 +40,10 @@ export class HomeComponent {
         response_type: "id_token token",
         scope: "openid profile api1",
         post_logout_redirect_uri : "http://localhost:4040/home"
-        //userStore : localStorage
+        //userStore : localStorage --> 
+        //not needed since by default will use InMemoryStorage. 
+        //when enabling localStorage, no page got displayed.
+
       });
 
       this.mgr.getUser()
@@ -63,93 +66,4 @@ export class HomeComponent {
   public login(){
     this.mgr.signinRedirect();
   }
-    /*var local;
-    var mgr;
-
-    if (typeof window !== 'undefined') {
-      local = window.localStorage; // your client-only logic here
-      mgr = new UserManager({ 
-        authority: "http://localhost:5000",
-        client_id: "js",
-        redirect_uri: "http://localhost:4040/callback",
-        response_type: "id_token token",
-        scope:"openid profile api1",
-        post_logout_redirect_uri : "http://localhost:4040/home",
-        userStore : local
-      });
-
-      mgr.getUser()
-      .then((user) => {
-        if (user) {
-          this.loggedIn = true;
-          this.currentUser = user;
-          this.userLoadedEvent.emit(user);
-        }
-        else {
-          this.loggedIn = false;
-        }
-      })
-      .catch((err) => {
-        this.loggedIn = false;
-      });
-
-      mgr.events.addUserUnloaded((e) => {
-        //if (!environment.production) {
-          console.log("user unloaded");
-        //}
-        this.loggedIn = false;
-      });
-    }
-  }*/
 }
-
-/*const settings = {
-    authority: "http://localhost:5000",
-    client_id: "js",
-    redirect_uri: "http://localhost:4040/callback",
-    response_type: "id_token token",
-    scope:"openid profile api1",
-    post_logout_redirect_uri : "http://localhost:4040/home",
-    userStore : local
-};*/
-/*
-export class HomeComponent {
-    mgr: UserManager = new UserManager(settings);
-    userLoadedEvent: EventEmitter<User> = new EventEmitter<User>();
-    currentUser: User;
-    loggedIn: boolean = false; 
-    authHeaders: Headers;
-
-    constructor(private http: Http) {
-    this.mgr.getUser()
-      .then((user) => {
-        if (user) {
-          this.loggedIn = true;
-          this.currentUser = user;
-          this.userLoadedEvent.emit(user);
-        }
-        else {
-          this.loggedIn = false;
-        }
-      })
-      .catch((err) => {
-        this.loggedIn = false;
-      });
-    this.mgr.events.addUserUnloaded((e) => {
-      //if (!environment.production) {
-        console.log("user unloaded");
-      //}
-      this.loggedIn = false;
-    });
-  }
-}
-
-const settings = {
-    authority: "http://localhost:5000",
-    client_id: "js",
-    redirect_uri: "http://localhost:4040/callback",
-    response_type: "id_token token",
-    scope:"openid profile api1",
-    post_logout_redirect_uri : "http://localhost:4040/home",
-    userStore: window.localStorage
-};*/
