@@ -49,13 +49,62 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
             services.AddIdentityServer()
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                .AddInMemoryClients(Config.GetClients());
+                .AddInMemoryClients(Config.GetClients())
+                .AddTemporarySigningCredential(); //TODO: To be removed with a more stable use of asymetric keys
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(LogLevel.Debug);
+            app.UseDeveloperExceptionPage();
+
+            app.UseIdentityServer();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+
+                AutomaticAuthenticate = false,
+                AutomaticChallenge = false
+            });
+
+            ///
+            /// Setup Custom Data Format
+            /// 
+            var schemeName = "oidc";
+            var dataProtectionProvider = app.ApplicationServices.GetRequiredService<IDataProtectionProvider>();
+            var distributedCache = app.ApplicationServices.GetRequiredService<IDistributedCache>();
+
+            var dataProtector = dataProtectionProvider.CreateProtector(
+                typeof(OpenIdConnectMiddleware).FullName,
+                typeof(string).FullName, schemeName,
+                "v1");
+
+            var dataFormat = new CachedPropertiesDataFormat(distributedCache, dataProtector);
+
+            ///
+            /// Azure AD Configuration
+            /// 
+            var clientId = Configuration["oidc:ClientId"];
+            var tenantId = Configuration["oidc:Tenant"];
+
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            {
+                AuthenticationScheme = schemeName,
+                DisplayName = "AzureAD",
+                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+                SignOutScheme = IdentityServerConstants.SignoutScheme,
+                ClientId = clientId,
+                Authority = $"https://login.microsoftonline.com/{tenantId}",
+                ResponseType = OpenIdConnectResponseType.IdToken,
+                StateDataFormat = dataFormat
+            });
+
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
+
+            /*loggerFactory.AddConsole(LogLevel.Debug);
 
             app.UseDeveloperExceptionPage();
             
@@ -99,7 +148,7 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
                 StateDataFormat = dataFormat
             });
 
-            loggerFactory.AddConsole();
+            loggerFactory.AddConsole();*/
         }
     }
 }

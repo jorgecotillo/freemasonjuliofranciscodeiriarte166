@@ -9,10 +9,12 @@ import { Router } from "@angular/router";
 
 export class CallbackComponent {
     constructor (private router: Router){
-        new UserManager({}).signinRedirectCallback().then(function () {
-            router.navigateByUrl("./home");
-        }).catch(function (e) {
-            console.error(e);
-        });
+        if (typeof window !== 'undefined') { 
+            new UserManager({}).signinRedirectCallback().then(function () {
+                router.navigateByUrl("./home");
+            }).catch(function (e) {
+                console.error(e);
+            });
+        }
     }
 }

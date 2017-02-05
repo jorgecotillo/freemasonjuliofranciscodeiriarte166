@@ -35,7 +35,7 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer.ApiConfiguration
                     ClientName = "JavaScript Client",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
-
+                    RequireConsent = false,
                     RedirectUris =           { "http://localhost:4040/callback" },
                     PostLogoutRedirectUris = { "http://localhost:4040/home" },
                     AllowedCorsOrigins =     { "http://localhost:4040" },
