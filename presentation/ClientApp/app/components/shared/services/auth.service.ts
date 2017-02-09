@@ -16,6 +16,8 @@ export class AuthService {
 
   constructor(private http: Http) {
     if (typeof window !== 'undefined') { 
+      //instance needs to be created within the if clause
+      //otherwise you'll get a sessionStorage not defined error.
         this._mgr = new UserManager(settings); 
         this._mgr.getUser()
         .then((user) => {
