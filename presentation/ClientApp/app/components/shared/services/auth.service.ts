@@ -177,7 +177,7 @@ const settings: any = {
   redirect_uri: 'http://localhost:4040/callback',
   post_logout_redirect_uri: 'http://localhost:4040/',
   response_type: 'id_token token',
-  scope: 'openid api1',
+  scope: 'openid profile email api1',
 
   silent_redirect_uri: 'http://localhost:4040/home',
   automaticSilentRenew: true,

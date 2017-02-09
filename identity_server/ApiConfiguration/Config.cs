@@ -13,7 +13,8 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer.ApiConfiguration
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile() // <-- usefull
+                new IdentityResources.Profile(),
+                new IdentityResources.Email() // <-- usefull
             };
         }
         
