@@ -33,7 +33,7 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigin",
+                options.AddPolicy("AllowAll",
                     builder => builder
                     .AllowAnyMethod()
                     .AllowAnyOrigin()
@@ -92,7 +92,7 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
                 AuthenticationScheme = schemeName,
-                DisplayName = "AzureAD",
+                DisplayName = "Office 365",
                 SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
                 SignOutScheme = IdentityServerConstants.SignoutScheme,
                 ClientId = clientId,
@@ -103,52 +103,6 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
 
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-
-            /*loggerFactory.AddConsole(LogLevel.Debug);
-
-            app.UseDeveloperExceptionPage();
-            
-            app.UseCors("AllowSpecificOrigin");
-            
-            app.UseIdentityServer();
-
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
-
-                AutomaticAuthenticate = false,
-                AutomaticChallenge = false
-            });
-
-            app.UseMvcWithDefaultRoute();
-
-            var schemeName = "oidc";   
-            var dataProtectionProvider = app.ApplicationServices.GetRequiredService<IDataProtectionProvider>();
-            var distributedCache = app.ApplicationServices.GetRequiredService<IDistributedCache>();
-
-            var dataProtector = dataProtectionProvider.CreateProtector(
-                typeof(OpenIdConnectMiddleware).FullName,
-                typeof(string).FullName, schemeName,
-                "v1");
-
-            var dataFormat = new CachedPropertiesDataFormat(distributedCache, dataProtector); 
-            var clientId = Configuration["oidc:ClientId"];
-            var clientSecret = Configuration["oidc:ClientSecret"];
-            var authority = string.Format(Configuration["oidc:AadInstance"], Configuration["oidc:Tenant"]);
-            
-            // middleware for external openid connect authentication
-            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
-            {
-                AuthenticationScheme = schemeName,
-                DisplayName = "AzureAD",
-                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
-                ClientId = clientId,
-                Authority = authority,
-                ResponseType = OpenIdConnectResponseType.IdToken,
-                StateDataFormat = dataFormat
-            });
-
-            loggerFactory.AddConsole();*/
         }
     }
 }

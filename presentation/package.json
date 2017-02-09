@@ -40,6 +40,10 @@
     "webpack-merge": "^0.14.1",
     "zone.js": "^0.6.21",
     "babel-polyfill": "6.22.0",
-    "oidc-client": "1.2.2"
+    "oidc-client": "1.2.2",
+    "font-awesome": "4.7.0",
+    "font-awesome-webpack": "0.0.4",
+    "less": "2.7.2",
+    "angular2-fontawesome": "0.8.0"
   }
 }

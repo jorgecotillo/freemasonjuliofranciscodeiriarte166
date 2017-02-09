@@ -1,4 +1,5 @@
 <div class='main-nav'>
+    {{ txt }}
     <div class='navbar navbar-inverse'>
         <div class='navbar-header'>
             <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
@@ -17,19 +18,29 @@
                         <span class='glyphicon glyphicon-home'></span> Quienes Somos?
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/counter']">
+                <li *ngIf="_loggedIn == true" [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/organigrama']">
                         <span class='glyphicon glyphicon-education'></span> Organigrama
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li *ngIf="_loggedIn == true" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/fetch-data']">
                         <span class='glyphicon glyphicon-th-list'></span> Fetch data
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li *ngIf="_loggedIn == true" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/admin']">
                         <span class='glyphicon glyphicon-th-list'></span> Admin
+                    </a>
+                </li>
+                <li *ngIf="_loggedIn == false" [routerLinkActive]="['link-active']">
+                    <a (click)="login()" [routerLink]="['/login']">
+                        <span class="glyphicon glyphicon-user"></span> Login
+                    </a>
+                </li>
+                <li *ngIf="_loggedIn == true" [routerLinkActive]="['link-active']">
+                    <a (click)="logout()" [routerLink]="['/logout']">
+                        <span class='glyphicon glyphicon-th-list'></span> Logout
                     </a>
                 </li>
             </ul>

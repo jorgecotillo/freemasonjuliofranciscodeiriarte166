@@ -32,14 +32,14 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer.ApiConfiguration
                 new Client
                 {
                     ClientId = "js",
-                    ClientName = "JavaScript Client",
+                    ClientName = "Angular2 JavaScript Client",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
                     RedirectUris =           { "http://localhost:4040/callback" },
                     PostLogoutRedirectUris = { "http://localhost:4040/home" },
                     AllowedCorsOrigins =     { "http://localhost:4040" },
-
+                    EnableLocalLogin = false,
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,

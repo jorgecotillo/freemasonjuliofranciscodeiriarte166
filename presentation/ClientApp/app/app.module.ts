@@ -8,6 +8,9 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
+import { OrganigramaComponent } from './components/organigrama/organigrama.component'
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component'
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -17,16 +20,21 @@ import { CallbackComponent } from './components/callback/callback.component';
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        CallbackComponent
+        OrganigramaComponent,
+        CallbackComponent,
+        UnauthorizedComponent
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        Angular2FontawesomeModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'callback', component: CallbackComponent },
+            { path: 'organigrama', component: OrganigramaComponent },
+            { path: 'unauthorized', component: UnauthorizedComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],
