@@ -1,7 +1,9 @@
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Julio.Francisco.De.Iriarte.Controllers
 {
@@ -11,25 +13,32 @@ namespace Julio.Francisco.De.Iriarte.Controllers
     public class OrganizationChartController : Controller
     {
         [HttpGet]
-        public HttpResponseMessage Get()
+        public JsonResult Get()
         {
             try 
             {
-                return 
+                var someObject = new { Id = 1, Name = "Jorge" };
+                return Json(someObject);
+                /*return 
                     new HttpResponseMessage()
                     {
-                        Content = new StringContent(""),
-                        StatusCode = HttpStatusCode.OK
-                    };
+                        Content = new StringContent(
+                            content: JsonConvert.SerializeObject(someObject), 
+                            encoding: Encoding.UTF8,
+                            mediaType: "application/json"),
+                        StatusCode = HttpStatusCode.OK,
+                    };*/
             }
             catch
             {
-                return 
+                throw;
+                /*return 
                     new HttpResponseMessage()
                     {
                         Content = new StringContent(""),
                         StatusCode = HttpStatusCode.OK
                     };
+                    */
             }
         }
     }

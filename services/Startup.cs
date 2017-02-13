@@ -1,22 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Julio.Francisco.De.Iriarte.Business.Services.Common;
 using Julio.Francisco.De.Iriarte.Data;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Authentication;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Julio.Francisco.De.Iriarte
 {
@@ -57,7 +44,6 @@ namespace Julio.Francisco.De.Iriarte
                     .AddAuthorization()
                     .AddJsonFormatters();
 
-            services.AddMvc();
             services.AddApiVersioning();
             services.AddScoped<IDbContext, ApplicationDbContext>();
         }

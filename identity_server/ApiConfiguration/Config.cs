@@ -45,6 +45,7 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer.ApiConfiguration
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
                         "api1"
                     }
                 }

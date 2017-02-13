@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace Angular2Application2
+namespace Julio.Francisco.De.Iriarte.Presentation
 {
     public class Program
     {

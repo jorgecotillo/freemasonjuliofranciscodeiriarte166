@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Angular2Application2
+namespace Julio.Francisco.De.Iriarte.Presentation
 {
     public class Startup
     {
@@ -37,6 +37,13 @@ namespace Angular2Application2
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            if (env.IsDevelopment())
+            {
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
+                    HotModuleReplacement = true
+                });
+            }
 
             app.UseStaticFiles();
 

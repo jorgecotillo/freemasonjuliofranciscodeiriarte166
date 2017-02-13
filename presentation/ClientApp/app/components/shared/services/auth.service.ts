@@ -9,7 +9,7 @@ import { UserManager, Log, MetadataService, User } from 'oidc-client';
 export class AuthService {
   _mgr: UserManager;
   _userLoadedEvent: EventEmitter<User> = new EventEmitter<User>();
-  _currentUser:User;
+  _currentUser: User;
   _loggedIn: boolean = false;
 
   _authHeaders: Headers;
@@ -106,12 +106,16 @@ export class AuthService {
    * @param options if options are not supplied the default content type is application/json
    */
   AuthGet(url: string, options?: RequestOptions): Observable<Response> {
+    console.log("Entered AuthGet");
       if (options) {
         options = this._setRequestOptions(options);
       }
       else {
+        //setting default authentication headers
+        this._setAuthHeaders(this._currentUser);
         options = this._setRequestOptions();
       }
+      console.log(options);
       return this.http.get(url, options);
   }
   /**
@@ -124,6 +128,8 @@ export class AuthService {
         options = this._setRequestOptions(options);
       }
       else {
+        //setting default authentication headers
+        this._setAuthHeaders(this._currentUser);
         options = this._setRequestOptions();
       }
       return this.http.put(url, body, options);
@@ -136,6 +142,8 @@ export class AuthService {
         options = this._setRequestOptions(options);
       }
       else {
+        //setting default authentication headers
+        this._setAuthHeaders(this._currentUser);
         options = this._setRequestOptions();
       }
       return this.http.delete(url, options);
@@ -150,6 +158,8 @@ export class AuthService {
         options = this._setRequestOptions(options);
       }
       else {
+        //setting default authentication headers
+        this._setAuthHeaders(this._currentUser);
         options = this._setRequestOptions();
       }
       return this.http.post(url, body, options);
@@ -168,7 +178,9 @@ export class AuthService {
       else {
         options = new RequestOptions({ headers: this._authHeaders, body: "" });
       }
-
+      console.log("About to show headers");
+      console.log(this._authHeaders);
+      console.log(options);
       return options;
   }
 }
@@ -181,7 +193,7 @@ const settings: any = {
   response_type: 'id_token token',
   scope: 'openid profile email api1',
 
-  silent_redirect_uri: 'http://localhost:4040/home',
+  silent_redirect_uri: 'http://localhost:4040/',
   automaticSilentRenew: true,
   //silentRequestTimeout:10000,
 

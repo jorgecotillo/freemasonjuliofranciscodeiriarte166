@@ -57,20 +57,4 @@ var serverBundleConfig = merge(sharedConfig, {
     externals: [nodeExternals({ whitelist: [allFilenamesExceptJavaScript] })] // Don't bundle .js files from node_modules
 });
 
-function getOutputName(filename){
-    var newName = '';
-
-    if (filename === 'boot-client'){
-        newName = 'main-client.js';
-    }
-    else if (filename === 'boot-server'){
-        newName = 'main-server.js';
-    }
-    else{
-        newName = filename + '.js';
-    }
-
-    return newName;
-};
-
 module.exports = [clientBundleConfig, serverBundleConfig];

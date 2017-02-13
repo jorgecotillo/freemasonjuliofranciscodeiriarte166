@@ -2,6 +2,7 @@ import { Component, Injectable, EventEmitter, Inject, OnInit } from '@angular/co
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { UserManager, Log, MetadataService, User, WebStorageStateStore } from 'oidc-client';
 import { AuthService } from '../shared/services/auth.service'
+import { Logger } from "angular2-logger/core";
 
 @Component({
     selector: 'nav-menu',
@@ -16,22 +17,23 @@ export class NavMenuComponent implements OnInit {
   public _loggedIn: boolean = false;
   _loadedUserSub: any;
 
-  constructor (private authService: AuthService){
+  constructor (private authService: AuthService, private _logger: Logger){
       this._authService = authService;
   }
 
   ngOnInit() {
-      this._loadedUserSub = this.authService._userLoadedEvent
+      this._loadedUserSub = this._authService._userLoadedEvent
         .subscribe(user => {
           this._loggedIn = true;
         });
   }
 
   public login(){
-      this.authService.startSigninMainWindow();
+      this._logger.debug("This is a test of logger");
+      this._authService.startSigninMainWindow();
   }
 
   public logout(){
-      this.authService.startSignoutMainWindow();
+      this._authService.startSignoutMainWindow();
   }
 }
