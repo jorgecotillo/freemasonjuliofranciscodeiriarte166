@@ -12,6 +12,9 @@ import { CallbackComponent } from './components/callback/callback.component';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 import { OrganigramaComponent } from './components/organigrama/organigrama.component'
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component'
+import { AuthService } from './components/shared/services/auth.service'
+import { GlobalEventsManager } from './components/shared/services/global.events.manager'
+import { AuthGuardService } from './components/shared/services/auth-guard.service'
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -34,12 +37,12 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'callback', component: CallbackComponent },
-            { path: 'organigrama', component: OrganigramaComponent },
+            { path: 'organigrama', component: OrganigramaComponent, canActivate:[AuthGuardService] },
             { path: 'unauthorized', component: UnauthorizedComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],
-    providers: [ Logger ],
+    providers: [ Logger, AuthService, AuthGuardService, GlobalEventsManager ],
     exports: [
         RouterModule
     ]

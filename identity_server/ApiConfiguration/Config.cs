@@ -38,7 +38,9 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer.ApiConfiguration
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
                     RedirectUris =           { "http://localhost:4040/callback" },
-                    PostLogoutRedirectUris = { "http://localhost:4040/home" },
+                    //NOTE: This link needs to match the link from the presentation layer - oidc-client
+                    //      otherwise IdentityServer won't display the link to go back to the site
+                    PostLogoutRedirectUris = { "http://localhost:4040/home" }, 
                     AllowedCorsOrigins =     { "http://localhost:4040" },
                     EnableLocalLogin = false,
                     AllowedScopes =

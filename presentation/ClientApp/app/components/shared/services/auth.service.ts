@@ -1,25 +1,29 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, Component } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-
+import { Router } from "@angular/router";
 import { UserManager, Log, MetadataService, User } from 'oidc-client';
-//import { environment } from '../../';
+import { GlobalEventsManager } from './global.events.manager';
 
 @Injectable()
 export class AuthService {
   _mgr: UserManager;
   _userLoadedEvent: EventEmitter<User> = new EventEmitter<User>();
   _currentUser: User;
-  _loggedIn: boolean = false;
+  _loggedIn: boolean;
 
   _authHeaders: Headers;
 
-  constructor(private http: Http) {
+  constructor(
+    private http:Http, 
+    private _router: Router, 
+    private _globalEventsManager: GlobalEventsManager) {
     if (typeof window !== 'undefined') { 
       //instance needs to be created within the if clause
       //otherwise you'll get a sessionStorage not defined error.
-        this._mgr = new UserManager(settings); 
-        this._mgr.getUser()
+        this._mgr = new UserManager(settings);
+        this._mgr
+        .getUser()
         .then((user) => {
             if (user) {
                 this._loggedIn = true;
@@ -51,7 +55,7 @@ export class AuthService {
 
   getUser() { 
       this._mgr.getUser().then((user) => {
-        console.log("got user", user);
+        console.log("got user");
         this._userLoadedEvent.emit(user);
       }).catch(function (err) {
         console.log(err);
@@ -74,12 +78,29 @@ export class AuthService {
         console.log(err);
       });
   }
+
   endSigninMainWindow() {
-      this._mgr.signinRedirectCallback().then(function (user) {
-        console.log("signed in", user);
-      }).catch(function (err) {
-        console.log(err);
-      });
+      //TODO: Validate why in a promise a global variable is not accessible,
+      //      instead a method scope variable is required so it can be used within
+      //      the promise.
+      //Answer: the previous code was using function (user) { } instead of just (user) =>
+      //        because is a function that only has one parameter (user) that explains
+      //        why the other variables were undefined, the fix was to use an anonymous function
+      //        a lambda expression.
+      
+      //TODO: Validate why even though _mgr has already been instantiated, I need to enclose
+      //      the call in !== undefined, removing the if clause results in a failure of _mgr
+      //      is undefined
+      if (typeof window !== 'undefined') {
+        this._mgr.signinRedirectCallback().then((user) => {
+          console.log("signed in");
+          this._globalEventsManager.showNavBar(true);
+          this._loggedIn = true;
+          this._router.navigate(['home']);
+        }).catch(function (err) {
+          console.log(err);
+        });
+      }
   }
 
   startSignoutMainWindow() {
@@ -178,9 +199,6 @@ export class AuthService {
       else {
         options = new RequestOptions({ headers: this._authHeaders, body: "" });
       }
-      console.log("About to show headers");
-      console.log(this._authHeaders);
-      console.log(options);
       return options;
   }
 }
@@ -189,12 +207,12 @@ const settings: any = {
   authority: 'http://localhost:5000',
   client_id: 'js',
   redirect_uri: 'http://localhost:4040/callback',
-  post_logout_redirect_uri: 'http://localhost:4040/',
+  post_logout_redirect_uri: 'http://localhost:4040/home',
   response_type: 'id_token token',
   scope: 'openid profile email api1',
 
-  silent_redirect_uri: 'http://localhost:4040/',
-  automaticSilentRenew: true,
+  silent_redirect_uri: 'http://localhost:4040/home',
+  //automaticSilentRenew: true,
   //silentRequestTimeout:10000,
 
   filterProtocolClaims: true,
