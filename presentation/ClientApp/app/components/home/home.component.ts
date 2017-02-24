@@ -4,7 +4,7 @@ import { UserManager, Log, MetadataService, User, WebStorageStateStore } from 'o
 
 @Component({
     selector: 'home',
-    template: require('./home.component.html')
+    template: require('./home.component.html'),
 })
 
 export class HomeComponent {

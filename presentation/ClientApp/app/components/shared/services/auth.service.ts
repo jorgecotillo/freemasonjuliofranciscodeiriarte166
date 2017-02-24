@@ -127,16 +127,12 @@ export class AuthService {
    * @param options if options are not supplied the default content type is application/json
    */
   AuthGet(url: string, options?: RequestOptions): Observable<Response> {
-    console.log("Entered AuthGet");
       if (options) {
         options = this._setRequestOptions(options);
       }
       else {
-        //setting default authentication headers
-        this._setAuthHeaders(this._currentUser);
         options = this._setRequestOptions();
       }
-      console.log(options);
       return this.http.get(url, options);
   }
   /**
@@ -149,8 +145,6 @@ export class AuthService {
         options = this._setRequestOptions(options);
       }
       else {
-        //setting default authentication headers
-        this._setAuthHeaders(this._currentUser);
         options = this._setRequestOptions();
       }
       return this.http.put(url, body, options);
@@ -163,8 +157,6 @@ export class AuthService {
         options = this._setRequestOptions(options);
       }
       else {
-        //setting default authentication headers
-        this._setAuthHeaders(this._currentUser);
         options = this._setRequestOptions();
       }
       return this.http.delete(url, options);
@@ -179,15 +171,13 @@ export class AuthService {
         options = this._setRequestOptions(options);
       }
       else {
-        //setting default authentication headers
-        this._setAuthHeaders(this._currentUser);
         options = this._setRequestOptions();
       }
       return this.http.post(url, body, options);
   }
 
 
-  private _setAuthHeaders(user: any) {
+  private _setAuthHeaders(user: User) {
       this._authHeaders = new Headers();
       this._authHeaders.append('Authorization', user.token_type + " " + user.access_token);
       this._authHeaders.append('Content-Type', 'application/json');
@@ -197,6 +187,8 @@ export class AuthService {
         options.headers.append(this._authHeaders.keys[0], this._authHeaders.values[0]);
       }
       else {
+        //setting default authentication headers
+        this._setAuthHeaders(this._currentUser);
         options = new RequestOptions({ headers: this._authHeaders, body: "" });
       }
       return options;

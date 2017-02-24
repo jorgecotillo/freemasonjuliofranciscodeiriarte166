@@ -35,6 +35,7 @@ export class OrganigramaComponent implements OnInit {
             .map(response => response.json())
             .subscribe(response => {
                 console.log(response);
+                this._response = response;
             });
     }
 
