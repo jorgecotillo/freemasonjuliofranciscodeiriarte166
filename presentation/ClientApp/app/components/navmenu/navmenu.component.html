@@ -15,32 +15,27 @@
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/home']">
-                        <span class='fa fa-home fa-2'></span> Quienes Somos?
+                        <span class='fa fa-home'></span> Quienes Somos?
                     </a>
                 </li>
                 <li *ngIf="_loggedIn" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/organigrama']">
-                        <span class='glyphicon glyphicon-education'></span> Organigrama
-                    </a>
-                </li>
-                <li *ngIf="_loggedIn" [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
+                        <span class='fa fa-sitemap'></span> Organigrama
                     </a>
                 </li>
                 <li *ngIf="_loggedIn" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/admin']">
-                        <span class='glyphicon glyphicon-th-list'></span> Admin
+                        <span class='fa fa-lock'></span> Admin
                     </a>
                 </li>
                 <li *ngIf="!_loggedIn" [routerLinkActive]="['link-active']">
                     <a (click)="login()" [routerLink]="['/login']">
-                        <i class="fa fa-user-circle-o fa-2"></i> Login
+                        <span class="fa fa-user-o"></span> Login
                     </a>
                 </li>
                 <li *ngIf="_loggedIn" [routerLinkActive]="['link-active']">
                     <a (click)="logout()" [routerLink]="['/logout']">
-                        <span class='glyphicon glyphicon-th-list'></span> Logout
+                        <span class='fa fa-sign-out'></span> Logout
                     </a>
                 </li>
             </ul>
