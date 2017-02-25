@@ -21,10 +21,14 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
         public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
-            Configuration = new ConfigurationBuilder()
+
+            var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json")
-                .Build();
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
         
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -88,6 +92,7 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
             /// 
             var clientId = Configuration["oidc:ClientId"];
             var tenantId = Configuration["oidc:Tenant"];
+            var authority = string.Format(Configuration["oidc:AadInstance"], tenantId);
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
@@ -96,7 +101,7 @@ namespace Julio.Francisco.De.Iriarte.IdentityServer
                 SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
                 SignOutScheme = IdentityServerConstants.SignoutScheme,
                 ClientId = clientId,
-                Authority = $"https://login.microsoftonline.com/{tenantId}",
+                Authority = authority,
                 ResponseType = OpenIdConnectResponseType.IdToken,
                 StateDataFormat = dataFormat
             });
