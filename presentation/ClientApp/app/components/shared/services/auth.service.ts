@@ -196,17 +196,17 @@ export class AuthService {
 }
 
 const settings: any = {
-  authority: 'http://identity.provider.cotillo-corp.com/',
-  client_id: 'js',
-  redirect_uri: 'http://juliofranciscodeiriarte166.org/callback',
-  post_logout_redirect_uri: 'http://juliofranciscodeiriarte166.org/home',
-  response_type: 'id_token token',
-  scope: 'openid profile email api1',
+  authority: process.env.authority,
+  client_id: process.env.client_id,
+  redirect_uri: process.env.redirect_uri,
+  post_logout_redirect_uri: process.env.post_logout_redirect_uri,
+  response_type: process.env.response_type,
+  scope: process.env.scope,
 
-  silent_redirect_uri: 'http://juliofranciscodeiriarte166.org/home',
+  silent_redirect_uri: process.env.silent_redirect_uri,
   //automaticSilentRenew: true,
   //silentRequestTimeout:10000,
 
-  filterProtocolClaims: true,
-  loadUserInfo: true
+  filterProtocolClaims: process.env.filterProtocolClaims,
+  loadUserInfo: process.env.loadUserInfo
 };

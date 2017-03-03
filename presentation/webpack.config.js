@@ -4,6 +4,17 @@ var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 var merge = require('webpack-merge');
 var allFilenamesExceptJavaScript = /\.(?!js(\?|$))([^.]+(\?|$))/;
+var definePlugin = require('./node_modules/webpack/lib/DefinePlugin');
+var dev_settings = require('./config/dev.config');
+var prod_settings = require('./config/prod.config');
+var settings;
+
+if(isDevBuild){
+    settings = dev_settings;
+}
+else{
+    settings = prod_settings;
+}
 
 // Configuration in common to both client-side and server-side bundles
 var sharedConfig = {
@@ -38,6 +49,23 @@ var clientBundleConfig = merge(sharedConfig,
         },
         devtool: isDevBuild ? 'inline-source-map' : null,
         plugins: [
+            new definePlugin({
+                'process.env' : {
+                    authority: JSON.stringify(settings.authority),
+                    client_id: JSON.stringify(settings.client_id),
+                    redirect_uri: JSON.stringify(settings.redirect_uri),
+                    post_logout_redirect_uri: JSON.stringify(settings.post_logout_redirect_uri),
+                    response_type: JSON.stringify(settings.response_type),
+                    scope: JSON.stringify(settings.scope),
+
+                    silent_redirect_uri: JSON.stringify(settings.silent_redirect_uri),
+                    //automaticSilentRenew: true,
+                    //silentRequestTimeout:10000,
+
+                    filterProtocolClaims: JSON.stringify(settings.filterProtocolClaims),
+                    loadUserInfo: JSON.stringify(settings.loadUserInfo)
+                }
+            }),
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
