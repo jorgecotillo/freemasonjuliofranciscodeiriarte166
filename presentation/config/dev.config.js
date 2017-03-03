@@ -11,7 +11,8 @@ const SETTINGS = {
   //silentRequestTimeout:10000,
 
   filterProtocolClaims: true,
-  loadUserInfo: true
+  loadUserInfo: true,
+  service_endpoint: 'http://localhost:5001'
 };
 
 module.exports = SETTINGS;

@@ -7,7 +7,7 @@ import 'rxjs/Rx'; //import needed in order to have .map function available
 @Component({
     selector: 'organigrama',
     template: require('./organigrama.component.html'),
-    providers: [AuthService]
+    styles: [require('./organigrama.component.css')]
 })
 
 export class OrganigramaComponent implements OnInit {
@@ -31,7 +31,7 @@ export class OrganigramaComponent implements OnInit {
     public getOrganigrama(){
         this
             ._authService
-            .AuthGet("http://localhost:5001/api/v1.0/OrganizationChart")
+            .AuthGet(process.env.service_endpoint + "/api/v1.0/OrganizationChart")
             .map(response => response.json())
             .subscribe(response => {
                 console.log(response);

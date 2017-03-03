@@ -63,7 +63,8 @@ var clientBundleConfig = merge(sharedConfig,
                     //silentRequestTimeout:10000,
 
                     filterProtocolClaims: JSON.stringify(settings.filterProtocolClaims),
-                    loadUserInfo: JSON.stringify(settings.loadUserInfo)
+                    loadUserInfo: JSON.stringify(settings.loadUserInfo),
+                    service_endpoint: JSON.stringify(settings.service_endpoint)
                 }
             }),
             new webpack.DllReferencePlugin({
