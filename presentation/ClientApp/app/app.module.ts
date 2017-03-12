@@ -14,11 +14,13 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
 import { AuthService } from './components/shared/services/auth.service';
 import { GlobalEventsManager } from './components/shared/services/global.events.manager';
 import { AuthGuardService } from './components/shared/services/auth-guard.service';
+import { GoogleChartComponent } from './components/shared/components/google-chart.component';
 
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
         AppComponent,
+        GoogleChartComponent,
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
@@ -29,7 +31,6 @@ import { AuthGuardService } from './components/shared/services/auth-guard.servic
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
-        //Angular2FontawesomeModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

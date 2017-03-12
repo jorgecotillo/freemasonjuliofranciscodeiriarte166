@@ -3,8 +3,12 @@
 }
 
 <app asp-prerender-module="ClientApp/dist/main-server">Loading...</app>
-
 <script src="~/dist/vendor.js" asp-append-version="true"></script>
 @section scripts {
     <script src="~/dist/main-client.js" asp-append-version="true"></script>
 }
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+</script>
