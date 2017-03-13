@@ -1,3 +1,18 @@
 div#pie_chart table {
 	border-collapse: initial;
 }
+
+.node {
+	background-color: #4189C7;
+	border-radius: 4px;
+	color: white;
+	border: 2px solid #0C1C84;
+	box-shadow: 7px 7px 5px grey;
+}
+
+.node-selected {
+	border: 2px solid #e3ca4b;
+    background-color: #fff7ae;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff7ae), to(#eee79e));
+	color: #4189C7;
+}

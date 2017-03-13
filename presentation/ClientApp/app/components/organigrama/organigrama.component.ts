@@ -67,19 +67,20 @@ export class OrganigramaComponent implements OnInit {
 
         // For each orgchart box, provide the name, manager, and tooltip to show.
         data.addRows([
-          [{v:'Mike', f:'Mike<div style="color:red; font-style:italic">President</div>'},
-           '', 'The President'],
-          [{v:'Jim', f:'Jim<div style="color:red; font-style:italic">Vice President</div>'},
-           'Mike', 'VP'],
-          ['Alice', 'Mike', ''],
-          ['Bob', 'Jim', 'Bob Sponge'],
-          ['Carol', 'Bob', '']
+          [{v:'VM', f:'Victor Manuel Vera Betancourt<div style="color:black; font-style:italic">V:.M:.</div>'},
+           '', 'Venerable Maestro'],
+          [{v:'PVMI', f:'Walter Perone Carrillo<div style="color:black; font-style:italic">P:.V:.M:.I:.</div>'},
+           'VM', 'Past Venerable Maestro Inmediato']
+          //['Alice', 'Mike', ''],
         ]);
         return data;
     }
 
     public org_ChartOptions = {
-        allowHtml: true
+        allowHtml: true,
+        size: "large",
+        nodeClass: "node",
+        selectedNodeClass: "node-selected"
     };
 
     ngOnDestroy(){
