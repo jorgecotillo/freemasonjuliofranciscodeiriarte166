@@ -1,5 +1,5 @@
 {
-  "name": "Angular2Spa",
+  "name": "Presentation",
   "version": "0.0.0",
   "dependencies": {
     "@angular/common": "2.0.0",
@@ -45,9 +45,8 @@
     "font-awesome": "4.7.0",
     "font-awesome-webpack": "0.0.4",
     "less": "2.7.2",
+    "typings": "2.1.0",
     "angular2-fontawesome": "0.8.0",
-    "angular2-google-chart": "1.1.3",
-    "bower": "1.8.0",
-    "gulp": "3.9.1"
+    "angular2-google-chart": "1.1.3"
   }
 }
