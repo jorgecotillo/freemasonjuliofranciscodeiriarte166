@@ -28,14 +28,12 @@ Obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
-/wwwroot/dist/*.svg
-#/ClientApp/dist/**
+/wwwroot/dist/**
+/ClientApp/dist/**
 
 # Workaround for https://github.com/aspnet/JavaScriptServices/issues/235
 !/wwwroot/dist/_placeholder.txt
 !/ClientApp/dist/_placeholder.txt
-#**/appsettings.json
-**/.DS_Store
 
 
 # MSTest test Results
@@ -195,7 +193,8 @@ ClientBin/
 orleans.codegen.cs
 
 # Workaround for https://github.com/aspnet/JavaScriptServices/issues/235
-#/node_modules/**
+.vs/
+/node_modules/**
 !/node_modules/_placeholder.txt
 
 # RIA/Silverlight projects
@@ -244,5 +243,5 @@ _Pvt_Extensions
 # Paket dependency manager
 .paket/paket.exe
 
-# FAKE - F# Make a
+# FAKE - F# Make
 .fake/
