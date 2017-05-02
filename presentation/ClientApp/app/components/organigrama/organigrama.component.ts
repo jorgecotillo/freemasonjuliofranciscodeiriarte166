@@ -25,13 +25,6 @@ export class OrganigramaComponent implements OnInit {
 
     ngOnInit() {
         this._data = this.org_ChartData();
-        this._loadedUserSub = 
-            this
-                ._authService
-                ._userLoadedEvent
-                .subscribe(user => {
-                    this._user = user;
-                });
     }
 
     public getOrganigrama(){

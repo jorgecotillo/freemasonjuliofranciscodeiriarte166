@@ -26,6 +26,7 @@ export class AuthService {
         .getUser()
         .then((user) => {
             if (user) {
+                console.log('got a user');
                 this._loggedIn = true;
                 this._currentUser = user;
                 this._userLoadedEvent.emit(user);
@@ -94,9 +95,13 @@ export class AuthService {
       if (typeof window !== 'undefined') {
         this._mgr.signinRedirectCallback().then((user) => {
           console.log("signed in");
+          console.log(user);
           this._globalEventsManager.showNavBar(true);
           this._loggedIn = true;
           this._router.navigate(['home']);
+          //This line is needed in order to set the global user object
+          this._currentUser = user;
+          console.log("current user", this._currentUser);
         }).catch(function (err) {
           console.log(err);
         });
@@ -166,7 +171,6 @@ export class AuthService {
    */
   AuthPost(url: string, data: any, options?: RequestOptions): Observable<Response> {
       let body = JSON.stringify(data);
-
       if (options) {
         options = this._setRequestOptions(options);
       }

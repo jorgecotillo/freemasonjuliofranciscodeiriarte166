@@ -1,6 +1,6 @@
 const SETTINGS = {
   authority: 'http://localhost:5000/',
-  client_id: 'js',
+  client_id: 'local-js',
   redirect_uri: 'http://localhost:4040/callback',
   post_logout_redirect_uri: 'http://localhost:4040/home',
   response_type: 'id_token token',
@@ -12,7 +12,7 @@ const SETTINGS = {
 
   filterProtocolClaims: true,
   loadUserInfo: true,
-  service_endpoint: 'http://localhost:5001'
+  service_endpoint: 'http://services.juliofranciscodeiriarte166.org/'//http://localhost:5001'
 };
 
 module.exports = SETTINGS;
