@@ -22,8 +22,8 @@ export class AdminComponent implements OnInit{
     public sendNotification(){
         this
             ._authService
-            .AuthPost(process.env.service_endpoint + "/api/v1.0/manage/notification",
-            { messageToBroadcast : "Hello" })
+            .AuthPost(process.env.service_endpoint + "/api/v1.0/manage/notification/hello",
+            {  })
             .map(response => response.json())
             .subscribe(response => {
                 console.log(response);
