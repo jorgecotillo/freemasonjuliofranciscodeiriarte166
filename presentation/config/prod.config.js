@@ -1,5 +1,5 @@
 const SETTINGS = {
-  authority: 'http://identity.provider.cotillo-corp.com/',
+  authority: 'https://identity.provider.cotillo-corp.com/',
   client_id: 'js',
   redirect_uri: 'http://juliofranciscodeiriarte166.org/callback',
   post_logout_redirect_uri: 'http://juliofranciscodeiriarte166.org/home',
