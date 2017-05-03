@@ -22,7 +22,7 @@ export class AdminComponent implements OnInit{
     public sendNotification(){
         this
             ._authService
-            .AuthPost(process.env.service_endpoint + "/api/v1.0/SendNotification",
+            .AuthPost(process.env.service_endpoint + "/api/v1.0/manage/notification",
             { messageToBroadcast : "Hello" })
             .map(response => response.json())
             .subscribe(response => {
