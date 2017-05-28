@@ -14,7 +14,8 @@ export class AuthGuardService implements CanActivate {
             return true; 
         }
         else{
-            this._router.navigate(['unauthorized']);
+            console.log("redirecting a user");
+            this._authService.startSigninMainWindow(); //Comment
         }
     }
 }

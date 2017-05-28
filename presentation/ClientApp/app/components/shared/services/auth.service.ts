@@ -18,34 +18,38 @@ export class AuthService {
     private http:Http, 
     private _router: Router, 
     private _globalEventsManager: GlobalEventsManager) {
-    if (typeof window !== 'undefined') { 
-      //instance needs to be created within the if clause
-      //otherwise you'll get a sessionStorage not defined error.
-        this._mgr = new UserManager(settings);
-        this._mgr
-        .getUser()
-        .then((user) => {
-            if (user) {
-                console.log('got a user');
-                this._loggedIn = true;
-                this._currentUser = user;
-                this._userLoadedEvent.emit(user);
-            }
-            else {
-                this._loggedIn = false;
-            }
-        })
-        .catch((err) => {
-            this._loggedIn = false;
-        });
-        this._mgr.events.addUserUnloaded((e) => {
-            //if (!environment.production) {
-                console.log("user unloaded");
-            //}
-            this._loggedIn = false;
-        });
-    }
+      this.instantiateUserManager();
   }
+
+  private instantiateUserManager() {
+    if (typeof window !== 'undefined') { 
+        //instance needs to be created within the if clause
+        //otherwise you'll get a sessionStorage not defined error.
+          this._mgr = new UserManager(settings);
+          this._mgr
+          .getUser()
+          .then((user) => {
+              if (user) {
+                  this._loggedIn = true;
+                  this._currentUser = user;
+                  this._userLoadedEvent.emit(user);
+              }
+              else {
+                  this._loggedIn = false;
+              }
+          })
+          .catch((err) => {
+              this._loggedIn = false;
+          });
+          this._mgr.events.addUserUnloaded((e) => {
+              //if (!environment.production) {
+                  console.log("user unloaded");
+              //}
+              this._loggedIn = false;
+          });
+      }
+  }
+
   clearState() {
       this._mgr.clearStaleState().then(function () {
         console.log("clearStateState success");
@@ -73,6 +77,12 @@ export class AuthService {
   }
 
   startSigninMainWindow() {
+    console.log("about to create a new user manager instance");
+      if (typeof window !== 'undefined' && typeof this._mgr === 'undefined') {
+        console.log("creating a new instance of UserManager"); //
+        this.instantiateUserManager();
+      }
+
       this._mgr.signinRedirect({ data: 'some data' }).then(function () {
         console.log("signinRedirect done");
       }).catch(function (err) {

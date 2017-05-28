@@ -77,8 +77,8 @@ export class OrganigramaComponent implements OnInit {
     };
 
     ngOnDestroy(){
-        if(this._loadedUserSub.unsubscribe()){
+        //if(this._loadedUserSub.unsubscribe()){
             //this._loadedUserSub.unsubscribe();
-        }
+        //}
     }
 }
