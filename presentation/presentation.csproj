@@ -8,7 +8,7 @@
     <PackageId>presentation</PackageId>
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
-    <GeneratedItemPatterns>wwwroot/dist/**;ClientApp/dist/**</GeneratedItemPatterns>
+    <GeneratedItemPatterns>wwwroot/dist/**;ClientApp/dist/**;node_modules/**</GeneratedItemPatterns>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(GeneratedItemPatterns)</DefaultItemExcludes>
   </PropertyGroup>
 
