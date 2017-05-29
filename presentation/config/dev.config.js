@@ -1,5 +1,5 @@
 const SETTINGS = {
-  authority: 'https://identity.provider.cotillo-corp.com/',
+  authority: 'http://localhost:5000/',
   client_id: 'local-js',
   redirect_uri: 'http://localhost:4040/callback',
   post_logout_redirect_uri: 'http://localhost:4040/home',
