@@ -28,6 +28,16 @@
                         <span class='fa fa-lock'></span> Admin
                     </a>
                 </li>
+                <li *ngIf="_loggedIn" [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/notificaciones']">
+                        <span class='fa fa-bell'></span> Notificaciones
+                    </a>
+                </li>
+                <li *ngIf="_loggedIn" [routerLinkActive]="['link-active']">
+                    <a (click)="redirectToContent()" [routerLink]="['/content']">
+                        <span class='fa fa-wordpress'></span> Contenidos
+                    </a>
+                </li>
                 <li *ngIf="!_loggedIn" [routerLinkActive]="['link-active']">
                     <a (click)="login()" [routerLink]="['/login']">
                         <span class="fa fa-user-o"></span> Login

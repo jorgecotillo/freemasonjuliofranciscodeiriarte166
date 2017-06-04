@@ -18,7 +18,7 @@ export class NavMenuComponent {
       private _authService: AuthService, 
       private _globalEventsManager: GlobalEventsManager) {
           _globalEventsManager.showNavBarEmitter.subscribe((mode)=>{
-            // mode will be null the first time it is created, so you need to igonore it when null
+            // mode will be null the first time it is created, so you need to ignore it when null
             if (mode !== null) {
               this._loggedIn = mode;
             }
@@ -31,5 +31,11 @@ export class NavMenuComponent {
 
   public logout(){
       this._authService.startSignoutMainWindow();
+  }
+
+  public redirectToContent(){
+      if(typeof window !== 'undefined'){
+          window.location.href = process.env.content_url;
+      }
   }
 }

@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit{
     _user: User;
     _loadedUserSub: any;
     _response: string = "";
+    public _success: boolean;
 
     constructor (private _authService: AuthService){
     }
@@ -20,7 +21,7 @@ export class AdminComponent implements OnInit{
     }
 
     public sendNotification(title: string, message: string){
-
+        this._success = false;
         var body = new Notification(title, message);
         
         this
@@ -30,18 +31,19 @@ export class AdminComponent implements OnInit{
                 body)
             .map(response => response.json())
             .subscribe(response => {
-                console.log(response);
-                this._response = response;
+                console.log('response', response);
+                this._response = "Envio satisfactorio";
+                this._success = true;
             });
     }
 }
 
 class Notification{
-    title : string;
-    message: string;
+    Title : string;
+    Message: string;
 
     constructor(title: string, message: string){
-        this.title = title;
-        this.message = message;
+        this.Title = title;
+        this.Message = message;
     }
 }

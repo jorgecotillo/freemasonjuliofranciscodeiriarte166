@@ -9,7 +9,9 @@ import { AuthService } from '../../components/shared/services/auth.service'
 
 export class UnauthorizedComponent implements OnInit {
 
-    constructor(private location: Location, private _authService: AuthService) {
+    constructor(
+        private location: Location, 
+        private _authService: AuthService) {
 
     }
 

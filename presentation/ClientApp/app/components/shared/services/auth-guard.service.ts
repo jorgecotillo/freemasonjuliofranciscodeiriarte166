@@ -6,16 +6,20 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-    constructor(private _authService: AuthService, private _router: Router) { 
+    constructor(
+        private _authService: AuthService, 
+        private _router: Router) { 
     }
 
     canActivate() {
         if (this._authService._loggedIn) { 
             return true; 
         }
-        else{
+        else {
             console.log("redirecting a user");
-            this._authService.startSigninMainWindow(); //Comment
+            //this._router.navigate(['unauthorized']);
+            //return false;
+            this._authService.startSigninMainWindow();
         }
     }
 }

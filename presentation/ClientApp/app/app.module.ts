@@ -16,7 +16,7 @@ import { GlobalEventsManager } from './components/shared/services/global.events.
 import { AuthGuardService } from './components/shared/services/auth-guard.service';
 import { GoogleChartComponent } from './components/shared/components/google-chart.component';
 import { AdminComponent } from './components/admin/admin.component';
-
+import { Notificaciones } from './components/notificaciones/notificaciones.component';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -28,6 +28,7 @@ import { AdminComponent } from './components/admin/admin.component';
         FetchDataComponent,
         HomeComponent,
         OrganigramaComponent,
+        Notificaciones,
         AdminComponent,
         CallbackComponent,
         UnauthorizedComponent
@@ -42,6 +43,7 @@ import { AdminComponent } from './components/admin/admin.component';
             { path: 'callback', component: CallbackComponent },
             { path: 'organigrama', component: OrganigramaComponent, canActivate:[AuthGuardService] },
             { path: 'admin', component: AdminComponent, canActivate:[AuthGuardService] },
+            { path: 'notificaciones', component: Notificaciones, canActivate:[AuthGuardService] },
             { path: 'unauthorized', component: UnauthorizedComponent },
             { path: '**', redirectTo: 'home' }
         ])

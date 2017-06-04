@@ -2,7 +2,7 @@ import { Injectable, EventEmitter, Component } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Router } from "@angular/router";
-import { UserManager, Log, MetadataService, User } from 'oidc-client';
+import { UserManager, Log, MetadataService, User, OidcClient } from 'oidc-client';
 import { GlobalEventsManager } from './global.events.manager';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class AuthService {
   _userLoadedEvent: EventEmitter<User> = new EventEmitter<User>();
   _currentUser: User;
   _loggedIn: boolean;
-
+  _test: OidcClient;
   _authHeaders: Headers;
 
   constructor(
@@ -76,7 +76,7 @@ export class AuthService {
       });
   }
 
-  startSigninMainWindow() {
+  startSigninMainWindow() { 
     console.log("about to create a new user manager instance");
       if (typeof window !== 'undefined' && typeof this._mgr === 'undefined') {
         console.log("creating a new instance of UserManager"); //
@@ -181,6 +181,7 @@ export class AuthService {
    */
   AuthPost(url: string, data: any, options?: RequestOptions): Observable<Response> {
       let body = JSON.stringify(data);
+
       if (options) {
         options = this._setRequestOptions(options);
       }
@@ -203,7 +204,7 @@ export class AuthService {
       else {
         //setting default authentication headers
         this._setAuthHeaders(this._currentUser);
-        options = new RequestOptions({ headers: this._authHeaders, body: "" });
+        options = new RequestOptions({ headers: this._authHeaders });
       }
       return options;
   }
@@ -218,8 +219,8 @@ const settings: any = {
   scope: process.env.scope,
 
   silent_redirect_uri: process.env.silent_redirect_uri,
-  //automaticSilentRenew: true,
-  //silentRequestTimeout:10000,
+  automaticSilentRenew:  process.env.automaticSilentRenew,
+  silentRequestTimeout: process.env.silentRequestTimeout,
 
   filterProtocolClaims: process.env.filterProtocolClaims,
   loadUserInfo: process.env.loadUserInfo

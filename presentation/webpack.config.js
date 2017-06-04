@@ -59,12 +59,13 @@ var clientBundleConfig = merge(sharedConfig,
                     scope: JSON.stringify(settings.scope),
 
                     silent_redirect_uri: JSON.stringify(settings.silent_redirect_uri),
-                    //automaticSilentRenew: true,
-                    //silentRequestTimeout:10000,
+                    automaticSilentRenew: JSON.stringify(settings.automaticSilentRenew),
+                    silentRequestTimeout: JSON.stringify(settings.silentRequestTimeout),
 
                     filterProtocolClaims: JSON.stringify(settings.filterProtocolClaims),
                     loadUserInfo: JSON.stringify(settings.loadUserInfo),
-                    service_endpoint: JSON.stringify(settings.service_endpoint)
+                    service_endpoint: JSON.stringify(settings.service_endpoint),
+                    content_url: JSON.stringify(settings.content_url)
                 }
             }),
             new webpack.DllReferencePlugin({
