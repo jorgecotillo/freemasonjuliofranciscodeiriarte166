@@ -1,10 +1,25 @@
 <h1>Notificaciones recientes</h1>
-<div class="list-group" *ngIf="_notifications">
-  <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let notification of _notifications">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{notification.title}}</h5>
+<div class="container" style="width:80%">
+  <form [formGroup]="notification_form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group row">
+      <label for="date" class="col-2 col-form-label">Desde:</label>
+      <div class="col-10">
+          <my-date-picker name="mydate" [options]="myDatePickerOptions" formControlName="myDate"></my-date-picker>
+      </div>
     </div>
-    <p class="mb-1">{{notification.message}}</p>
-    <small></small>
-  </a>
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary" [disabled]="!notification_form.valid">Mostrar</button>
+    </div>
+  </form>
+  <div class="form-group row">
+    <div class="list-group" *ngIf="_notifications">
+      <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let notification of _notifications">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{notification.title}}</h5>
+        </div>
+        <p class="mb-1">{{notification.message}}</p>
+        <small></small>
+      </a>
+    </div>
+  </div>
 </div>

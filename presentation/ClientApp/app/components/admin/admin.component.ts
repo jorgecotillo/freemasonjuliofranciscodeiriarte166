@@ -1,4 +1,5 @@
-import { Component,OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../shared/services/auth.service' 
 import { UserManager, Log, MetadataService, User, WebStorageStateStore } from 'oidc-client';
 import 'rxjs/Rx'; //import needed in order to have .map function available
@@ -12,7 +13,11 @@ export class AdminComponent implements OnInit{
     _user: User;
     _loadedUserSub: any;
     _response: string = "";
-    public _success: boolean;
+    _success: boolean;
+    admin_form = new FormGroup({
+        title : new FormControl('', Validators.required),
+        message : new FormControl('', Validators.required)
+    });
 
     constructor (private _authService: AuthService){
     }
@@ -20,30 +25,25 @@ export class AdminComponent implements OnInit{
     ngOnInit() {
     }
 
-    public sendNotification(title: string, message: string){
+    onSubmit() {
+       this
+       .sendNotification(this.admin_form.value);
+    }
+
+    sendNotification(notification: Notification){
+        
         this._success = false;
-        var body = new Notification(title, message);
         
         this
             ._authService
             .AuthPost(
                 process.env.service_endpoint + "/api/v1.0/manage/notification",
-                body)
+                notification)
             .map(response => response.json())
             .subscribe(response => {
                 console.log('response', response);
                 this._response = "Envio satisfactorio";
                 this._success = true;
             });
-    }
-}
-
-class Notification{
-    Title : string;
-    Message: string;
-
-    constructor(title: string, message: string){
-        this.Title = title;
-        this.Message = message;
     }
 }

@@ -13,7 +13,7 @@ const SETTINGS = {
   filterProtocolClaims: true,
   loadUserInfo: true,
   service_endpoint: 'http://services.juliofranciscodeiriarte166.org',
-  content_url: 'http://wordpress.juluofranciscodeiriarte166.org/wp-login.php'
+  content_url: 'http://wordpress.juliofranciscodeiriarte166.org/wp-login.php'
 };
 
 module.exports = SETTINGS;

@@ -17,6 +17,8 @@ import { AuthGuardService } from './components/shared/services/auth-guard.servic
 import { GoogleChartComponent } from './components/shared/components/google-chart.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { Notificaciones } from './components/notificaciones/notificaciones.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -35,6 +37,8 @@ import { Notificaciones } from './components/notificaciones/notificaciones.compo
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        ReactiveFormsModule,
+        MyDatePickerModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
